@@ -1,0 +1,16 @@
+node_modules/
+dist/
+coverage/
+*.log
+.env
+.DS_Store
+results/
+*.local
+.vscode/
+.idea/
+
+# Scripts and instructions (don't push)
+push_gradually.ps1
+PUSH_INSTRUCTIONS.md
+push_gradually.ps1
+PUSH_INSTRUCTIONS.md
