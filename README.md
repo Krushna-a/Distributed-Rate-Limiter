@@ -31,6 +31,7 @@ This rate limiter protects APIs from abuse by limiting request rates per user/IP
 </p>
 
 **Key Components:**
+
 - **Express Middleware**: Intercepts and validates requests
 - **Redis**: Centralized state store with Lua scripts for atomicity
 - **Circuit Breaker**: Handles Redis failures gracefully
@@ -51,25 +52,19 @@ https://github.com/user-attachments/assets/0150581e-b9e6-4b5d-b3ec-6f21bb12eebc
 <details>
 <summary><b>✅ Request Allowed (Click to expand)</b></summary>
 <br>
-<img src="https://github.com/user-attachments/assets/b33aca96-84c7-44f8-bdeb-b09d6a0e6df9" alt="Allowed Request" width="800">
+<img src="https://github.com/user-attachments/assets/608cb4ad-4aa7-4865-bec4-3decfacb099b" alt="Docker Container" width="650">
 </details>
 
 <details>
 <summary><b>❌ Rate Limit Exceeded (Click to expand)</b></summary>
 <br>
-<img src="https://github.com/user-attachments/assets/19a6a11a-9819-4114-8fd6-006de6990e00" alt="Rate Limited" width="800">
+<img src="https://github.com/user-attachments/assets/6bb8b35c-8f9f-4a28-b715-145ac6c2790e" alt="Redis Logs" width="650">
 </details>
 
 <details>
 <summary><b>🐳 Docker Container Running (Click to expand)</b></summary>
 <br>
-<img src="https://github.com/user-attachments/assets/608cb4ad-4aa7-4865-bec4-3decfacb099b" alt="Docker Container" width="650">
-</details>
-
-<details>
-<summary><b>📊 Redis Server Logs (Click to expand)</b></summary>
-<br>
-<img src="https://github.com/user-attachments/assets/6bb8b35c-8f9f-4a28-b715-145ac6c2790e" alt="Redis Logs" width="650">
+<img src="https://github.com/user-attachments/assets/b33aca96-84c7-44f8-bdeb-b09d6a0e6df9" alt="Allowed Request" width="800">
 </details>
 
 ---
@@ -166,20 +161,24 @@ LOG_LEVEL=info
 ## 🧮 Algorithms
 
 ### Token Bucket
+
 - Tokens refill at constant rate
 - Allows controlled bursts up to capacity
 - **Ideal for:** APIs with occasional traffic spikes
 
 **Configuration:**
+
 - `capacity`: Maximum tokens (burst size)
 - `refillRate`: Tokens added per second
 
 ### Sliding Window Counter
+
 - Tracks exact request timestamps using Redis sorted sets
 - Enforces strict per-window limits
 - **Ideal for:** Precise quota enforcement (e.g., "100 req/min")
 
 **Configuration:**
+
 - `maxRequests`: Maximum requests per window
 - `windowMs`: Time window in milliseconds
 
@@ -200,7 +199,7 @@ k6 run benchmarks/k6/concurrent-burst.js
 
 ## 📂 Project Structure
 
-```
+```ini
 src/
 ├── algorithms/          # Local fallback implementations
 ├── middleware/          # Express middleware
@@ -228,6 +227,7 @@ The circuit breaker monitors Redis health and switches modes on failure:
 | **Half-Open** | Testing recovery |
 
 **Fallback Modes:**
+
 - `fail-open`: Allow all requests (permissive)
 - `fail-closed`: Deny all requests (secure)
 - `local-cache`: Per-server limits using in-memory store
@@ -284,7 +284,7 @@ The circuit breaker monitors Redis health and switches modes on failure:
 
 **Problem:** Multiple servers checking limits simultaneously could cause over-limit:
 
-```
+```html
 Server A reads: 99 requests → allows request
 Server B reads: 99 requests → allows request
 Result: 101 requests (limit was 100) ❌
