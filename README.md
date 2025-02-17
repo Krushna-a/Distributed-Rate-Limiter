@@ -2,6 +2,16 @@
 
 A production-grade distributed rate limiting middleware built with Node.js, Express, and Redis.
 
+## Demo
+
+<img width="1917" alt="Rate Limiter - Allowed Request" src="https://github.com/user-attachments/assets/b33aca96-84c7-44f8-bdeb-b09d6a0e6df9" />
+
+<img width="1917" alt="Rate Limiter - Rate Limited" src="https://github.com/user-attachments/assets/19a6a11a-9819-4114-8fd6-006de6990e00" />
+
+<img width="728" alt="Docker Container" src="https://github.com/user-attachments/assets/608cb4ad-4aa7-4865-bec4-3decfacb099b" />
+
+<img width="701" alt="Redis Logs" src="https://github.com/user-attachments/assets/6bb8b35c-8f9f-4a28-b715-145ac6c2790e" />
+
 ## Overview
 
 This rate limiter protects APIs from abuse by limiting request rates per user/IP. It works across multiple servers using Redis as a centralized state store, ensuring consistency and preventing race conditions under high concurrency.
